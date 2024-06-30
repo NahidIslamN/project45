@@ -1,0 +1,50 @@
+{% extends 'account_settings.html' %}
+
+
+{% block title %}
+My Account
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-12 me-auto ms-auto">
+        {% if user.profile_pic %}
+        <img style="display: block;"  class="w-25 rounded-circle ms-auto me-auto" src="{{user.profile_pic.url}}" alt="Image">
+        {% else %}
+        <img style="display: block;"  class="w-25 rounded-circle ms-auto me-auto" src="/static/users.png" alt="Image">
+        {% endif %}
+        <h2 class="text-center" >{{user.first_name}} {{user.last_name}}</h2>
+        <h5 class="text-center" ><i class="fa-solid fa-phone"></i> {{user.phone_number}}</h5>
+        <h5 class="text-center" ><i class="fa-solid fa-location-dot"></i> {{user.adress}}</h5>
+   
+    </div>
+</div>
+<hr>
+
+
+{% if bankaccount %}
+<div class="row">
+    <div class="col-12">
+        <h3><b>Account No :</b> {{bankaccount}}</h3>
+        <h3><b>Hostel Account :</b> {{bankaccount.Hostel_account.hostel_name}}</h3>
+        <h3><b>Balance (tk) :</b> {{bankaccount.balance}} tk</h3>
+        <h3><b>Balance (chal) :</b> {{bankaccount.balance_chal}} pot</h3>
+    </div>
+</div>
+{% else %}
+<h2>Sorry You Don't have any bankaccount !
+    You are a Hostel admin   </h2>
+{% endif %}
+
+<hr>
+
+
+{% endblock content %}

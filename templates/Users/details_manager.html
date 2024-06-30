@@ -1,0 +1,31 @@
+{% extends 'base_template.html' %}
+
+
+{% block title %}
+Manager Details
+{% endblock title %}
+
+
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-12 me-auto ms-auto">
+        <img style="display: block;"  class="w-25 rounded-circle ms-auto me-auto" src="{{manager.users.profile_pic.url}}" alt="Image">
+        <h2 class="text-center" >{{manager.users.first_name}} {{manager.users.last_name}}</h2>
+        <h5 class="text-center" ><i class="fa-solid fa-phone"></i> {{manager.phone_number}}</h5>
+        <h5 class="text-center" ><i class="fa-solid fa-location-dot"></i> {{manager.users.adress}}</h5>
+        <button style="display: block;" class="btn btn-primary text-center me-auto ms-auto mt-4">message</button>
+        
+
+    </div>
+</div>
+<hr>
+
+
+
+
+
+{% endblock content %}

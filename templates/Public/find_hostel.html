@@ -1,0 +1,148 @@
+{% extends 'base_index.html' %}
+
+
+{% block title %}
+Hostel Search
+{% endblock title %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+        <div class="mt-5 mb-1" style="color:  white;">.</div>
+
+         
+        <div class="container">
+  
+          <div class="row gy-4">
+
+            <form action="{% url 'hostels' %}" method="post" id="hostelForm">
+                {% csrf_token %}
+
+            <div class="form-group ">
+                <label for="input-datalist">Hostels</label>
+                <input type="text" name="scarchkey" class="form-control" placeholder="Hostels" list="list-hotestels" id="input-datalist">
+                <datalist id="list-hotestels" style="height: 30%;">
+                    {% for x in sdlist %}
+                    <option>{{x}}</option>
+                    {% endfor %}
+                                    
+             
+                </datalist>
+            </div>
+
+            </form>
+
+
+
+
+
+
+
+           <div class="container-fluid">
+            <hr>
+           </div>
+
+
+
+           <div class="row">            
+                {% for x in Hostels %}
+                <div class="col-lg-4 col-md-6 col-12   p-3">
+                    <a href="{{x.holtel_cover_photo.url}}" target="_blank"><img class="w-100" src="{{x.holtel_cover_photo.url}}" alt="Image"></a>
+
+                    <div>
+                        <a class="btn btn-success w-100 mt-1" href="/learnmore/?id={{x.id}}">learn more...</a>
+                    </div>
+                    
+
+                </div>
+                {% endfor %}            
+           </div>
+            
+
+
+       
+  <!-- paginator -->
+    
+           <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+             {% if Hostels.has_previous %}
+              <li class="page-item">
+                    <a class="page-link" href="/hostels/?page=1"  >First</a>
+              </li>
+    
+              <li class="page-item">
+                <a class="page-link" href="?page={{Hostels.previous_page_number}}" tabindex="-1">Previous</a>
+              </li>
+             {% else %}
+             <li class="page-item">
+                <a class="page-link disabled" href="#"  >First</a>
+             </li>
+    
+             <li class="page-item">
+                    <a class="page-link disabled" href="#" tabindex="-1">Previous</a>
+             </li>
+             {% endif %}
+             
+             {% for p in totalpage_list %}
+              <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+             {% endfor %}
+    
+          
+              {% if Hostels.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{Hostels.next_page_number}}" >Next</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{last_page}}" >Last</a>
+              </li>
+              {% else %}
+              <!-- None -->
+              {% endif %}
+            </ul>
+        </nav>
+
+        <!-- paginator -->
+    
+    
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- /About Section -->
+
+
+{% endblock content %}
+
+
+{% block extrascripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', e => {
+        $('#input-datalist').autocomplete()
+    }, false);
+</script>
+
+
+
+<script>
+    document.getElementById('input-datalist').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent default form submission
+            document.getElementById('hostelForm').submit(); // Submit the form
+        }
+    });
+</script>
+
+
+{% endblock extrascripts %}

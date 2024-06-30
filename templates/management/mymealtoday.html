@@ -1,0 +1,237 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+My Todays Meal Report
+{% endblock title %}
+
+{% block extralinks %}
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+
+{% endblock extralinks %}
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-12 p-3 card">
+        
+        <form action="{% url 'today' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h4>Meal Status</h4>
+
+            {% if user.active_status %}
+            <label class="switch mt-3">
+                <input type="checkbox" name="checked" value="True" checked>
+                <span class="slider round"></span>
+            </label>
+            {% else %}
+            <label class="switch mt-3">
+                <input type="checkbox" name="checked" value="False" >
+                <span class="slider round"></span>
+            </label>
+            {% endif %}
+
+
+            {% if user.S %}
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" name="morning" value="True" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Morning
+                </label>
+            </div>
+            {% else %}
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" name="morning" value="True" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Morning
+                </label>
+            </div>
+            {% endif %}
+
+            
+            {% if user.D %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="day" value="True" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Day
+                </label>
+            </div>
+            {% else %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="day" value="True" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Day
+                </label>
+            </div>
+            {% endif %}
+
+
+
+            {% if user.R %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="night" value="True" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Night
+                </label>
+            </div>
+            {% else %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="night" value="True" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Night
+                </label>
+            </div>
+            {% endif %}
+      
+
+          
+            <button type="submit" class="btn btn-primary ms-auto d-block">save changes</button>
+          </form>
+
+
+          
+
+    </div>
+</div>
+
+
+<h2 class="text-center">Today's Meal</h2>
+<h5 class="text-center">Date: {{today}} </h5>
+
+<hr>
+
+<div class="row">
+
+
+{%  for meal in student_list %}
+  <div class="col-4  p-3">
+
+    <div class="card rounded-corner bg-dark">
+    {% if meal.user.profile_pic %}
+    <img style="height: 100px; width: 100px;" class="mt-3 img-fluid  rounded-circle d-block me-auto ms-auto" src="{{meal.user.profile_pic.url}}" alt="Image">
+    {% else %}
+    <img class="img-fluid w-50 rounded-corner d-block me-auto ms-auto" src="/static/users.png" alt="User">
+    {% endif %}
+    <h4 class="text-center text-white mt-3">{{meal.user.first_name}} {{meal.user.last_name}}</h4>
+    <address class="d-block text-center text-white">meal status</address>
+
+    <div class="p-2 text-center">
+
+      
+        <input class="form-check-input" type="checkbox" name="morning"  {% if meal.S %} checked {% endif %} value="True" id="flexCheckChecked">
+
+        <input class="form-check-input" type="checkbox" name="morning" {% if meal.D %} checked {% endif %} value="True" id="flexCheckChecked">   
+      
+        <input class="form-check-input" type="checkbox" name="morning" {% if meal.R %} checked {% endif %} value="True" id="flexCheckChecked">
+        
+    </div>
+    </div>
+
+  </div>
+  {% endfor %}
+
+{% if user.manager_status %}
+  <div >
+    <div class="row">
+
+
+      <div class="col-4 p-3">
+        <div class="card p-2">
+          <h3 class="text-center">Morning</h3>
+          
+          <h5 class="text-center">Rice: {{S}}</h5>
+
+        </div>
+      </div>
+
+
+      <div class="col-4 p-3">
+        <div class="card p-2">
+          <h3 class="text-center">Day</h3>
+         
+          <h5 class="text-center">Rice: {{D}}</h5>
+
+        </div>
+      </div>
+
+      <div class="col-4 p-3">
+        <div class="card p-2">
+          <h3 class="text-center">Night</h3>
+         
+          <h5 class="text-center">Rice: {{N}}</h5>
+
+        </div>
+      </div>
+
+
+      
+
+      </div>
+    </div>
+    {% endif %}
+
+
+
+{% endblock content %}

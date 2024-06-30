@@ -1,0 +1,121 @@
+{% extends 'base_template.html' %}
+
+
+
+
+{% block title %}
+Admit Student
+{% endblock title %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Admit Student</h5>
+          <div class="card">
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'admitasutdent' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">First Name</label>
+                  <input required type="text" name="first_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                    <input required type="text" name="last_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input required type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input required type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Phone</label>
+                  <input required type="text" maxlength="15" name="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+              </div>
+
+
+                <div class="mb-3  d-none">
+                    <label for="exampleInputEmail1" class="form-label">Password</label>
+                    <input required type="password" name="password" value="1234" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                
+                <div class="mb-3">
+                    <label for="Select" class="form-label">Select Sits</label>
+                    <select required name="sit" id="Select" class="form-select">
+                      <option value="">Select Sits</option>
+
+                      {% for sit in sits %}
+                      <option value="{{sit.id}}">{{sit.admin.hostel_name}} {{forloop.counter}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                </div>
+
+
+                <div class="mb-3 ">
+                    <label for="exampleInputEmail1" class="form-label">Image</label>
+                    <input required type="file" name="Profilepic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+
+
+
+
+            </div>
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+{% endblock content %}

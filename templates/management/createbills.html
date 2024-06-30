@@ -1,0 +1,99 @@
+{% extends 'manager_base.html' %}
+
+
+{% block title %}
+Bills Create
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Create A Bills</h5>
+          <div >
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'billcreate' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Bill title</label>
+                  <input required type="text" name="title" class="form-control" >                  
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tk amount</label>
+                    <input required type="number" name='ammount' class="form-control" >                  
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Rice amount</label>
+                    <input required type="number" name="riceamount" class="form-control" >                  
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Last date</label>
+                    <input required type="date" name="lastdate" class="form-control" >                  
+                </div>
+
+                
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Extras</label>
+                  <input required type="number" maxlength="15" name="jorimana" class="form-control" >                  
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Discriptions</label>
+                  <textarea class="form-control" name="billdiscriptions" rows="5" cols="10" ></textarea>                  
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+
+
+
+
+            </div>
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

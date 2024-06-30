@@ -1,0 +1,70 @@
+{% extends 'base_template.html' %}
+
+
+{% block title %}
+Manager Creation
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Admit Student</h5>
+          <div class="card">
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'sent_otp_email' %}" method="post" >
+                {% csrf_token %}
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+        
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Enter Your Email</label>
+                  <input required type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+        
+
+
+
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+
+
+
+
+            </div>
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock content %}

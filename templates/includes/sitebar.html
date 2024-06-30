@@ -1,0 +1,120 @@
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+          <div class="brand-logo d-flex align-items-center justify-content-between">
+            <a href="/" class="text-nowrap logo-img">
+              <img src="/static/assets/images/logos/dark-logo.svg" width="180" alt="" />
+            </a>
+            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+              <i class="ti ti-x fs-8"></i>
+            </div>
+          </div>
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            <ul id="sidebarnav">
+
+      
+            
+              <li class="nav-small-cap">
+                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                <span class="hide-menu">User & Accounts</span>
+              </li>
+
+            {% if user.user_type == '1' %}
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/createsits/" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-article"></i>
+                  </span>
+                  <span class="hide-menu">Create hostel sits</span>
+                </a>
+              </li>
+
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/admitasutdent/" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-user"></i>
+                  </span>
+                  <span class="hide-menu">Admit Hostel Student</span>
+                </a>
+              </li>
+
+              
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/allstudents/" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-user"></i>
+                  </span>
+                  <span class="hide-menu">All Students</span>
+                </a>
+              </li>
+
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/createmanager/" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-user-plus"></i>
+                  </span>
+                  <span class="hide-menu">Create Hostel Manager</span>
+                </a>
+              </li>
+
+           
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="/managerdetails/" aria-expanded="false">
+                  <span>
+                    <i class="fa-solid fa-circle-info"></i>
+                  </span>
+                  <span class="hide-menu">Manager Details</span>
+                </a>
+              </li>
+
+              {% endif %}
+
+            {% if user.user_type == "3" %}
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/management/today/" aria-expanded="false">
+                <span>
+                  <i class="fa-solid fa-circle-info"></i>
+                </span>
+                <span class="hide-menu">Meal Report(Today)</span>
+              </a>
+            </li>
+
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="#" aria-expanded="false">
+                <span>
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </span>
+                <span class="hide-menu">My meal history</span>
+              </a>
+            </li>
+          {% endif %}
+
+            {% if user.manager_status %}
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/management/" aria-expanded="false">
+                <span>
+                  <i class="fa-solid fa-gauge"></i>
+                </span>
+                <span class="hide-menu">Manager Dashboard</span>
+              </a>
+            </li>
+
+   
+
+
+
+            {% endif %}
+
+
+
+            </ul>
+
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+      <!--  Sidebar End -->

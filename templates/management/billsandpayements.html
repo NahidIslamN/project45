@@ -1,0 +1,89 @@
+{% extends 'manager_base.html' %}
+
+
+{% block title %}
+Bills Create
+{% endblock title %}
+
+
+
+
+
+
+{% block content %}
+
+
+
+
+<div class="row ">
+    {% for x in bills %}
+    <div style="background-color: #ecf0f1;" class="col-12 card p-5 ">
+        <div >
+
+            <h3 class="text-center">{{x.title}}</h3>
+            <h5 class="text-center">Amount Tk : {{x.bill_amount}} tk</h5>
+            <h5 class="text-center">Amount Rice : {{x.rice_ammount}} pot</h5>
+            <h5 class="text-center">Last Date : {{x.last_date_of_payment}}</h5>
+            <p style="text-align: justify;">{{x.discription}}</p>
+
+            <button type="button" class="btn btn-primary d-block ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{x.id}}"  >payments</button>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+<!-- modal -->
+
+
+
+{% for y in bills %}
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop-{{y.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Payments</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+        <form action="{% url 'billsandpayements' %}" method="post">
+        {% csrf_token %}
+
+        <input class="d-none" type="number" name="bill_id" value="{{y.id}}">
+
+          {% for x in student_list %}
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="payment_user_set" value="{{x.users.id}}" id="flexCheckChecked" {% if x.users in y.payment_user.all %} checked {% endif %}>
+                    <label class="form-check-label" for="flexCheckChecked">
+                     <img style="height: 20px; width: 20px;" class="img-flued rounded-circle" src="{{x.users.profile_pic.url}}" alt="Image"> {{x.users.first_name}} {{x.users.last_name}}
+                    </label>
+                  </div>
+            
+
+          {% endfor %}
+                  <button type="submit" class="btn btn-primary d-block ms-auto mt-4" >save changes</button>
+        </form>
+
+        </div>
+    
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+
+
+
+
+
+
+{% endblock content %}

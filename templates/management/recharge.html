@@ -1,0 +1,87 @@
+{% extends 'manager_base.html' %}
+
+
+
+
+{% block title %}
+Admit Student
+{% endblock title %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Admit Student</h5>
+          <div class="card">
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'recharge' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="Select" class="form-label">Select Account No</label>
+                    <select required name="account_id" id="Select" class="form-select">
+                      <option value="">Select Account No</option>
+
+                      {% for bankaccount in bankaccountlist %}
+                      <option value="{{bankaccount.id}}">{{bankaccount}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Amount Tk</label>
+                  <input required type="number" name="Rechargeamount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Amount Rice</label>
+                  <input required type="number" name="Rechargeamount2" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+  
+
+
+              
+                <button type="submit" class="btn btn-primary">Sent money</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,106 @@
+{% extends 'base_template.html' %}
+
+
+
+
+{% block title %}
+Admit Student
+{% endblock title %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Update Student</h5>
+          <div class="card">
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'allstudents' student.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input type="hidden" name="_method" value="SAVE">
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+              
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input  type="text" name="username" value="{{student.users.username}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input  type="email" name="email" value="{{student.users.email}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Phone</label>
+                  <input  type="text" maxlength="15" name="phone" value="{{student.users.phone_number}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+              </div>
+
+
+                
+                <div class="mb-3">
+                    <label for="Select" class="form-label">Select Sits</label>
+                    <select  name="sit" id="Select" class="form-select">
+                      <option value="">Select Sits</option>
+
+                      {% for sit in sits %}
+                      <option value="{{sit.id}}">{{sit.admin.hostel_name}} {{forloop.counter}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                </div>
+
+
+         
+
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+
+
+
+
+            </div>
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+{% endblock content %}

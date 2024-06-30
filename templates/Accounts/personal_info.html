@@ -1,0 +1,80 @@
+{% extends 'account_settings.html' %}
+
+{% block title %}
+Personal Informations
+{% endblock title %}
+
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title fw-semibold mb-4">Change Personal Info</h5>
+        <div class="card">
+          <div class="card-body">
+
+
+
+            <form action="{% url 'personalinfo' %}" method="post" enctype="multipart/form-data" >
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" value="{{user.first_name}}">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" value="{{user.last_name}}" >
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Worke Place</label>
+                <input type="text" maxlength="249" name="workd_place" class="form-control" value="{{user.workd_place}}">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Study at</label>
+                <input type="text" maxlength="249" name="study_at" class="form-control" value="{{user.study_at}}">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Address</label>
+                <input type="text" maxlength="249" name="adress" class="form-control" value="{{user.adress}}" >
+              </div>
+
+ 
+              
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                <input type="text" maxlength="15" name="phone_number" class="form-control" value="{{user.phone_number}}">
+              </div>
+
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Upload Profile Picture</label>
+                <input type="file"  name="profile_pic" class="form-control" >
+              </div>
+       
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+
+
+
+
+
+          </div>
+        </div>
+        
+        
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends 'base_template.html' %}
+
+
+{% block title %}
+Manager Creation
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+        
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Admit Student</h5>
+          <div class="card">
+            <div class="card-body">
+
+
+
+
+
+              <form action="{% url 'createmanager' %}" method="post" >
+                {% csrf_token %}
+
+                {% if messages %}
+                {{message.tags}}  
+                <div class="alert alert-primary" role = 'alert'>
+                  {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="Select" class="form-label">Select Student</label>
+                    <select required name="user_pk" id="Select" class="form-select">
+                      <option value="">Select as Manager</option>
+
+                      {% for student in students %}
+                      <option value="{{student.id}}">{{student}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Join Date</label>
+                  <input required type="date" name="join_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Expire Date</label>
+                    <input required type="date" name="expire_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">                  
+                </div>
+
+
+
+              
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+
+
+
+
+            </div>
+          </div>
+
+     
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock content %}

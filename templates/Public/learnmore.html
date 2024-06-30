@@ -1,0 +1,73 @@
+{% extends 'base_index.html' %}
+
+
+{% block title %}
+Learnmore about {{hostel.hostel_name}}
+
+{% endblock title %}
+
+
+
+
+
+{% block content %}
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+        <div class="mt-5 mb-1" style="color:  white;">.</div>
+
+         
+        <div class="container">
+  
+          <div class="row gy-4">
+            
+            <div class="col-lg-8 col-md-10 col-12 me-auto ms-auto">
+
+              <img class="w-100" src="{{hostel.holtel_cover_photo.url}}" alt="Cover photo">
+              <h2 class="text-center mt-2" >{{hostel.hostel_name}}</h2>
+              <h5 class="text-center">Country   : {{hostel.cuntry}}</h5>
+              <h5 class="text-center">Dictict   : {{hostel.district}}</h5>
+              <h5 class="text-center">Location   : {{hostel.upozilla}}</h5>
+
+            </div>
+
+            <div class="col-lg-10 col-12 p-3 card shadow-sm me-auto ms-auto">
+              <h4 class="text-center">Hostel Sits</h4>
+
+
+              <div class="row">
+                {% for sit in sits %}
+                <div class="col-lg-6 col-12 p-5">
+                  <div class="card">
+                    <a href="{{sit.photo_of_bed.url}}"><img class="w-100" src="{{sit.photo_of_bed.url}}" alt="image"></a>
+
+                    <h5 class="text-center p-3">Sit range : {{sit.sit_range}} tk</h5>
+
+
+                    {% if sit.if_blank %}
+                    <a class="btn btn-success" href="#">blank</a>
+                    {% else %}
+
+                    <a class=" btn btn-danger" href="#">booked</a>
+                    {% endif %}
+
+
+
+                    
+
+                  </div>
+                  
+                </div>
+                {% endfor %}
+              </div>
+
+            </div>
+
+          </div>
+  
+        </div>
+  
+      </section><!-- /About Section -->
+
+{% endblock content %}

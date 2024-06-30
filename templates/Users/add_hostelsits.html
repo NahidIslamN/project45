@@ -1,0 +1,73 @@
+{% extends 'base_template.html' %}
+
+
+
+{% block title %}
+Create Hostel Sits
+{% endblock title %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title fw-semibold mb-4">Create Hostel Sits</h5>
+
+
+
+
+        <div class="card">
+
+
+
+            <div class="card-body">
+                
+            {% if messages %}
+            {{message.tags}}  
+            <div class="alert alert-primary" role = 'alert'>
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+
+            </div>
+            {% endif %}
+
+            <form action="{% url 'createsits' %}" method="post" enctype="multipart/form-data"  >
+              {% csrf_token %}
+
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Sits Range</label>
+                <input type="number" required  name="sit_range" class="form-control" >
+              </div>
+
+              <div class="mb-3">
+                <label  for="exampleInputPassword1" class="form-label">Upload Bed Photo</label>
+                <input required type="file"  name="bed_photo" class="form-control" >
+              </div>
+       
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+
+
+
+
+
+          </div>
+        </div>
+        
+        
+
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
