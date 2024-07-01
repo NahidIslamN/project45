@@ -335,6 +335,21 @@ class BillsandPayments(View):
 
 
 
+class UserBillPayments(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        user = request.user
+        if user.user_type == "3":
+            
+
+
+            return render(request, "management/userbillmanagement.html")
+        else:
+            return redirect('/login/')
+
+
+
+
         
 
 

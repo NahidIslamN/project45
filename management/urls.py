@@ -10,5 +10,6 @@ urlpatterns = [
     path('mealmanagement/', ManageMeal.as_view(), name='mealmanagement'),
     path('billcreate/', CreateBills.as_view(), name='billcreate'),
     path('billsandpayements/', BillsandPayments.as_view(), name='billsandpayements'),
+    path('userbills/', UserBillPayments.as_view(), name='userbills'),
    
 ]
